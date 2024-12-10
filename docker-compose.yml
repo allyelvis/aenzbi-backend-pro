@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - database
+  database:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: aenzbi_admin
+      POSTGRES_PASSWORD: securepassword
+      POSTGRES_DB: aenzbi_db
+    ports:
+      - "5432:5432"
+volumes:
+  db_data:
